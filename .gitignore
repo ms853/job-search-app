@@ -1,0 +1,5 @@
+#Ignore all the node modules
+job-search/node_modules/
+
+#ignore lock file
+job-search/package-lock.json
