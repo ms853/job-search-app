@@ -4,6 +4,7 @@ import Slides from '../components/slides';
 
 
 
+
 //Data that will be displayed on the welcome page.
 const SLIDE_DATA = [
 {text: 'Welcome to Job Search!', color: '#03A9F4'},
