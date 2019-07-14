@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
-import {Text, View} from 'react-native';
-import Slides from '../components/slides';
-
-
-
+import {Text, View, AsyncStorage} from 'react-native';
+//import Slides from '../components/slides';
+import Slides from "../components/Slides";
+import { AppLoading } from 'expo';
 
 //Data that will be displayed on the welcome page.
 const SLIDE_DATA = [
@@ -14,16 +14,36 @@ const SLIDE_DATA = [
 
 class WelcomeScreen extends Component {
  
+    state = {
+        token: null
+    };
+
+    //before component renders get the token.
+    async componentWillMount() {
+       let token = await AsyncStorage.getItem('fb_token');
+        
+       if(token) {
+            this.props.navigation.navigate('Map');
+            this.setState({ token });
+       }else{
+            //updaete tokem value if we don't have one.
+            this.setState({ token: false });
+       }
+       
+    }
+
     onSlidesComplete = () => {
         this.props.navigation.navigate('Auth');
     }
 
     render() {
+        if(_.isNull(this.state.token)) {
+            return <AppLoading />;
+        }
+
         return (
-            //data fed to component. 
-            <View>
-                <Slides data={SLIDE_DATA} onComplete={this.onSlidesComplete} />
-            </View>
+            //data fed to component
+                <Slides data={SLIDE_DATA} onComplete={this.onSlidesComplete} /> 
         );
     }
 }

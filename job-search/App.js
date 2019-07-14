@@ -12,10 +12,18 @@ import ReviewScreen from './screens/ReviewScreen';
 import SettingsScreen from './screens/SettingsScreen';
 
 const MainNavigator = createBottomTabNavigator({
-  Auth: { screen: AuthScreen },
-  Welcome: { screen: WelcomeScreen },
+  Welcome: { 
+    screen: WelcomeScreen,
+    navigationOptions: { tabBarVisible: false }
+  },
+  Auth: { 
+    screen: AuthScreen,
+    navigationOptions: { tabBarVisible: false }
+  },
   //In the main flow of the app display a tab navigation
   Main: {
+    navigationOptions: { tabBarVisible: false },
+
     screen: createBottomTabNavigator({
       Deck: {screen: DeckScreen},
       Map: {screen: MapScreen},
@@ -28,15 +36,21 @@ const MainNavigator = createBottomTabNavigator({
       }
     })
   }
+}, 
+{ 
+  lazy: true
 });
 
 
 const AppNavigator = createAppContainer(MainNavigator);
 
 const App = () => {
-  <Provider store={store}>
-    <AppNavigator />
-  </Provider>
+  return(
+    <Provider store={store}>
+      <AppNavigator />
+    </Provider>
+  );
+  
 }
 
 export default App;

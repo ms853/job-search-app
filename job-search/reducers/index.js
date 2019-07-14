@@ -1,5 +1,6 @@
-import { combinedReducers } from redux; 
+import { combineReducers } from 'redux'; 
+import auth from './auth_reducer'
 
-export default combinedReducers({
-    auth: () => { return {} } //auth reducer will return empty object by default.
+export default combineReducers({
+    auth
 });
